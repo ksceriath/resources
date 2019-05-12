@@ -7,6 +7,10 @@
         -name filename   :  find filename
     
         -iname filename  :  (case-insensitive) find filename
+
+        -user username   :  find files belonging to user username
+
+        -group groupname :  find files belonging to group groupname
         
         -type f          :  find 'files'
               d          :  find 'directories'
