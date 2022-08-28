@@ -1,0 +1,10 @@
+{
+  "baseFontSize": 19,
+  "translucency": false,
+  "theme": "system",
+  "cssTheme": "Deep Work",
+  "textFontFamily": "",
+  "enabledCssSnippets": [
+    "font"
+  ]
+}

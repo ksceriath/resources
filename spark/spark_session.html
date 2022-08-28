@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>SPARK_session</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<pre><code>val spark = SparkSession
+           .builder()
+           .appName(&quot;Spark Basics&quot;)
+           .config(&quot;author.name&quot;, &quot;kshitij-tyagi&quot;)
+           .getOrCreate()</code></pre>
+</section>
+<section class="slide level2">
+
+<h3 id="what-is-spark">What is SPARK?</h3>
+<div>
+<ul>
+<li class="fragment">Large scale data processing system.</li>
+<li class="fragment">Distributed ⇒ Distributed Data</li>
+</ul>
+</div>
+</section>
+<section id="rdd-partitions" class="slide level2">
+<h2>RDD | PARTITIONS</h2>
+<div>
+<ul>
+<li class="fragment">Resilient Distributed Dataset.</li>
+<li class="fragment">RDD essentially is
+<ul>
+<li class="fragment">an IMMUTABLE collection of elements of your data</li>
+<li class="fragment">DISTRIBUTED across nodes in your cluster</li>
+<li class="fragment">partitioned into PARTITIONS</li>
+</ul></li>
+<li class="fragment">The partitions can be operated in parallel</li>
+<li class="fragment">RDD was also the primary user-facing API in Spark since its inception.</li>
+<li class="fragment">Uses a Row object as representation of an element.</li>
+</ul>
+</div>
+</section>
+<section id="rdd-partitions-1" class="slide level2">
+<h2>RDD | PARTITIONS</h2>
+<figure>
+<img data-src="rdd.svg" alt="RDD" /><figcaption aria-hidden="true">RDD</figcaption>
+</figure>
+</section>
+<section id="dataset" class="slide level2">
+<h2>DATASET</h2>
+<div>
+<ul>
+<li class="fragment">“Collection of strongly-typed JVM objects”</li>
+<li class="fragment">Dataset api comes with declarative and type-safe operators</li>
+<li class="fragment">Safety of syntax and analysis checks at compile time</li>
+</ul>
+</div>
+</section>
+<section id="dataset-encoders" class="slide level2">
+<h2>DATASET | ENCODERS</h2>
+<div>
+<ul>
+<li class="fragment">Encoders are responsible for converting between JVM objects and the InternalRow object.</li>
+<li class="fragment">Spark provides Encoder implementations for most of the standard types (including case classes)</li>
+<li class="fragment">ExpressionEncoder[T] : generic encoder for jvm objects of type T</li>
+</ul>
+</div>
+</section>
+<section id="dataframe" class="slide level2">
+<h2>DATAFRAME</h2>
+<div>
+<ul>
+<li class="fragment"><p>“Collection of rows with a schema that is the result of executing a structured query”</p></li>
+<li class="fragment"><p>Dataframe = RDD + Schema</p></li>
+<li class="fragment"><p>As of Spark 2.0.0,</p>
+<pre><code>type DataFrame = DataSet[Row] </code></pre></li>
+</ul>
+</div>
+</section>
+<section id="transformations-actions" class="slide level2">
+<h2>TRANSFORMATIONS | ACTIONS</h2>
+<div>
+<ul>
+<li class="fragment">Transformations are operators that transform a dataset into another dataset or and ‘intermediate’ dataset.</li>
+<li class="fragment">Transformations are lazy.</li>
+<li class="fragment">Actions are operators that (usually) collapse a dataset.</li>
+<li class="fragment">Result of a transformation is not (usually) cached automatically.</li>
+</ul>
+</div>
+</section>
+<section id="transformations-actions-1" class="slide level2">
+<h2>TRANSFORMATIONS | ACTIONS</h2>
+<figure>
+<img data-src="TransformationsActions.svg" alt="Transformations and Action" /><figcaption aria-hidden="true">Transformations and Action</figcaption>
+</figure>
+</section>
+<section id="lineage" class="slide level2">
+<h2>LINEAGE</h2>
+<div>
+<ul>
+<li class="fragment">Set of all transformations that track the evolution of an RDD / DataSet</li>
+<li class="fragment">Helps make the RDD fault tolerant</li>
+<li class="fragment">Spark creates a DAG containing all the RDD with their lineage</li>
+</ul>
+</div>
+</section>
+<section id="narrow-wide-transformations" class="slide level2">
+<h2>NARROW | WIDE TRANSFORMATIONS</h2>
+<div>
+<ul>
+<li class="fragment">Narrow transformations do not require movement of data across partitions</li>
+<li class="fragment">Transformations such as map, mapPartition, filter, flatMap are narrow</li>
+<li class="fragment">Wide transformations require data to be moved across partitions</li>
+<li class="fragment">Transformations such as groupByKey, reduceByKey are wide transformations</li>
+</ul>
+</div>
+</section>
+<section id="narrow-wide-transformations-1" class="slide level2">
+<h2>NARROW | WIDE TRANSFORMATIONS</h2>
+<p><img data-src="Narrow.svg" alt="Narrow Transformations" />           <img data-src="Wide.svg" alt="Wide Transformations" /></p>
+</section>
+<section id="shuffling" class="slide level2">
+<h2>SHUFFLING</h2>
+<div>
+<ul>
+<li class="fragment">Movement of data across partitions</li>
+<li class="fragment">Triggered by wide transformations</li>
+<li class="fragment">Data written to a ‘shuffle file’ on the map side of the transformation</li>
+<li class="fragment">The partitions in which data is written are called ‘shuffle partitions’</li>
+</ul>
+</div>
+</section>
+<section id="jobs-stages" class="slide level2">
+<h2>JOBS | STAGES</h2>
+<div>
+<ul>
+<li class="fragment">Each action translates to one Job.</li>
+<li class="fragment">A Job can be composed of multiple Stages.</li>
+<li class="fragment">A Stage is a sequence of transformations which can be performed independently.</li>
+<li class="fragment">Typically, stage boundaries exist at shuffle boundaries.</li>
+</ul>
+</div>
+</section>
+<section id="tasks" class="slide level2">
+<h2>TASKS</h2>
+<div>
+<ul>
+<li class="fragment">Intersection of a stage and a partition.</li>
+</ul>
+</div>
+</section>
+<section id="jobs-stages-tasks" class="slide level2">
+<h2>JOBS | STAGES | TASKS</h2>
+<p><img data-src="JobsStagesTasks.svg" /></p>
+</section>
+<section id="transformation-examples" class="slide level2">
+<h2>TRANSFORMATION EXAMPLES</h2>
+<p><img data-src="transformation_ex.svg" /></p>
+</section>
+<section id="transformation-examples-1" class="slide level2">
+<h2>TRANSFORMATION EXAMPLES</h2>
+<p><img data-src="transformation_ex2.svg" /></p>
+</section>
+<section id="action-examples" class="slide level2">
+<h2>ACTION EXAMPLES</h2>
+<div>
+<ul>
+<li class="fragment">count</li>
+<li class="fragment">reduce</li>
+<li class="fragment">foreach</li>
+<li class="fragment">collect</li>
+<li class="fragment">…</li>
+</ul>
+</div>
+</section>
+<section id="basic-actions" class="slide level2">
+<h2>BASIC ACTIONS</h2>
+<div>
+<ul>
+<li class="fragment">cache (marks the dataset for persistence)</li>
+<li class="fragment">isEmpty</li>
+<li class="fragment">isLocal</li>
+<li class="fragment">printSchema</li>
+<li class="fragment">rdd</li>
+<li class="fragment">toDF</li>
+</ul>
+</div>
+</section>
+<section id="application-spark-context" class="slide level2">
+<h2>APPLICATION | SPARK CONTEXT</h2>
+<div>
+<ul>
+<li class="fragment">Spark-Submit launches a separate spark application.</li>
+<li class="fragment">An application is composed of jobs.</li>
+<li class="fragment">An Application is generally associated with exactly one instance of SparkContext object.</li>
+<li class="fragment">Spark Context talks to cluster manager to allocate executors.</li>
+<li class="fragment">Spark Context sends tasks over to executors.</li>
+</ul>
+</div>
+</section>
+<section id="driver-executors" class="slide level2">
+<h2>DRIVER | EXECUTORS</h2>
+<div>
+<ul>
+<li class="fragment">Driver is the jvm process responsible for
+<ul>
+<li class="fragment">running the main method of the application.</li>
+<li class="fragment">instantiating the SparkContext.</li>
+<li class="fragment">creation and scheduling of tasks on executors.</li>
+</ul></li>
+<li class="fragment">Executors are jvm processes responsible for executing tasks and communicating the results to driver.</li>
+</ul>
+</div>
+</section>
+<section id="yarn" class="slide level2">
+<h2>YARN</h2>
+<div>
+<ul>
+<li class="fragment">Cluster Mode
+<ul>
+<li class="fragment">Driver runs ‘as a child thread of’ Application Master.</li>
+<li class="fragment">Client initiates the application, and periodically poll AM for status updates. Client can go away after initiation.</li>
+</ul></li>
+<li class="fragment">Client Mode
+<ul>
+<li class="fragment">Driver runs in the client process.</li>
+<li class="fragment">ApplicationMaster runs on the cluster.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="application-master" class="slide level2">
+<h2>APPLICATION MASTER</h2>
+<div>
+<ul>
+<li class="fragment">Process managed by YARN</li>
+<li class="fragment">Responsible for execution of a single application</li>
+<li class="fragment">Asks for containers from the Resource Manager</li>
+<li class="fragment">Launches tasks on containers</li>
+</ul>
+</div>
+</section>
+<section id="spark-on-yarn" class="slide level2">
+<h2>SPARK ON YARN</h2>
+<p><img data-src="sparkONyarn.svg" /></p>
+</section>
+<section id="structured-streaming" class="slide level2">
+<h2>STRUCTURED STREAMING</h2>
+<ul>
+<li>Micro batch mode buckets inputs into separate batches (sliding window)</li>
+<li>Continuous processing - long running tasks that continously process data.
+<ul>
+<li>Each task reads from a source partition</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section>
+<section id="questions" class="title-slide slide level1">
+<h1>Questions</h1>
+
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

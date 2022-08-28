@@ -17,3 +17,4 @@ options:
 
 
 
+-r : recurse into directories :: IS THIS REQUIRED IN LINUX? CHECK.

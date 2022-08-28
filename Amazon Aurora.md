@@ -1,0 +1,1 @@
+![[Excalidraw/Amazon Aurora]]

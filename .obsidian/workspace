@@ -1,0 +1,144 @@
+{
+  "main": {
+    "id": "ac964b3ccc32064d",
+    "type": "split",
+    "children": [
+      {
+        "id": "21223a66dd24d525",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "dataStructures/swissTable.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8d4c889736d1021e",
+    "type": "split",
+    "children": [
+      {
+        "id": "e68d91cc65c0ed8c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c51da6943f365fd5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "3abad561961f068d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#Dra",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 298.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "284d4b643bfb0918",
+    "type": "split",
+    "children": [
+      {
+        "id": "b77c03896ecb80a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d8d5e22be424267",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "dataStructures/swissTable.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "a4293a444a7fb16b",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "aa4ee1bc2248ce08",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "dataStructures/swissTable.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "15d93b40e53f6c9a",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "7c893504c8cd2018",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 226.44989013671875,
+    "collapsed": true
+  },
+  "active": "21223a66dd24d525",
+  "lastOpenFiles": [
+    "Excalidraw/Amazon Aurora.md",
+    "Amazon Aurora.md",
+    "Databases.md",
+    "EBS.md",
+    "EC2.md",
+    "Excalidraw/EC2.md",
+    "Excalidraw/EBS.md",
+    "Chain Replication.md",
+    "LLVM.md",
+    "Excalidraw/LLVM.md"
+  ]
+}

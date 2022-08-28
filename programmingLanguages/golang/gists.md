@@ -1,6 +1,3 @@
-[ Source: https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html ]
-
-
 Doug McIlroy, the eventual inventor of Unix pipes, wrote in 1964 (!):
 "We should have some ways of coupling programs like garden hose--screw in another segment when it becomes necessary to massage data in another way. This is the way of IO also."
 
@@ -24,3 +21,8 @@ Go gives a set of powerful but easy to understand, easy to use building blocks f
 Go provides much of the expressiveness of languages like Python and Ruby with some of the performance and concurrency of languages like C++.
 
 Go doesn't give the 'precise control over every nuance of execution' like C++.
+
+
+
+##### Resources
+1. https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html 
