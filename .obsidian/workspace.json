@@ -1,0 +1,261 @@
+{
+  "main": {
+    "id": "ac964b3ccc32064d",
+    "type": "split",
+    "children": [
+      {
+        "id": "36e1cd4daac67c3c",
+        "type": "split",
+        "children": [
+          {
+            "id": "6c3ffba4f724f94f",
+            "type": "tabs",
+            "dimension": 54.699646643109546,
+            "children": [
+              {
+                "id": "2065721b01a6cb99",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Spanner.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              },
+              {
+                "id": "4c24be993e5ecda5",
+                "type": "leaf",
+                "state": {
+                  "type": "excalidraw",
+                  "state": {
+                    "file": "Excalidraw/FaRM.md"
+                  }
+                }
+              },
+              {
+                "id": "5ab09def9dc2cd7f",
+                "type": "leaf",
+                "state": {
+                  "type": "excalidraw",
+                  "state": {
+                    "file": "Excalidraw/Network - data transfer.md"
+                  }
+                }
+              },
+              {
+                "id": "2b556961a5104415",
+                "type": "leaf",
+                "state": {
+                  "type": "excalidraw",
+                  "state": {
+                    "file": "Excalidraw/FaRM - Network - data transfer.md"
+                  }
+                }
+              }
+            ],
+            "currentTab": 3
+          },
+          {
+            "id": "90b267746603fdb5",
+            "type": "tabs",
+            "dimension": 45.30035335689046,
+            "children": [
+              {
+                "id": "a9a69089f105dec0",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "FaRM.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              },
+              {
+                "id": "d356727beafe126b",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Optimistic Concurrency Control.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              },
+              {
+                "id": "176f3fe770c29b4f",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "NVRAM.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ],
+            "currentTab": 2
+          }
+        ],
+        "direction": "horizontal"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8d4c889736d1021e",
+    "type": "split",
+    "children": [
+      {
+        "id": "e68d91cc65c0ed8c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c51da6943f365fd5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3abad561961f068d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "herd effect",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 298.5
+  },
+  "right": {
+    "id": "284d4b643bfb0918",
+    "type": "split",
+    "children": [
+      {
+        "id": "b77c03896ecb80a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d8d5e22be424267",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "NVRAM.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "a4293a444a7fb16b",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "aa4ee1bc2248ce08",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "NVRAM.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "15d93b40e53f6c9a",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "7c893504c8cd2018",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": true,
+      "command-palette:Open command palette": false,
+      "graph:Open graph view": true,
+      "canvas:Create new canvas": false,
+      "markdown-importer:Open format converter": true,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
+    }
+  },
+  "active": "176f3fe770c29b4f",
+  "lastOpenFiles": [
+    "FaRM.md",
+    "Excalidraw/FaRM - Network - data transfer.md",
+    "Optimistic Concurrency Control.md",
+    "NVRAM.md",
+    "DRAM.md",
+    "Pessimistic Concurrency Control.md",
+    "Excalidraw/Network - data transfer.md",
+    "NIC.md",
+    "Excalidraw/FaRM.md",
+    "Spanner.md",
+    "externally consistent transactions.md",
+    "Linearizability.md",
+    "Snapshot Isolation.md",
+    "EXTERNAL CONSISTENCY.md",
+    "SERIALIAZABLE.md",
+    "2 phase commit.md",
+    "Excalidraw/Spanner.md",
+    "Herd Effect.md",
+    "Scheme.md",
+    "Chain Replication.md",
+    "2 phase locking.md",
+    "Excalidraw/spark on yarn.md",
+    "Airflow.md",
+    "spark/spark-notes.md",
+    "architectures/case studies/Stack Overflow.md",
+    "spark/sparkONyarn.svg",
+    "Distributed Transactions.md"
+  ]
+}

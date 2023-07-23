@@ -1,10 +1,10 @@
 {
-  "baseFontSize": 19,
+  "baseFontSize": 22,
   "translucency": false,
-  "theme": "system",
-  "cssTheme": "Deep Work",
-  "textFontFamily": "",
-  "enabledCssSnippets": [
-    "font"
-  ]
+  "theme": "moonstone",
+  "cssTheme": "Typomagical",
+  "textFontFamily": "Cascadia Code PL",
+  "enabledCssSnippets": [],
+  "monospaceFontFamily": "Cascadia Mono PL",
+  "accentColor": "#3c09e1"
 }

@@ -14,7 +14,7 @@ The existing Hadoop infrastructure is composed of three things:
 
 Spark core is a replacement for the (2) Hadoop Map Reduce, which is the core calculation engine.
 
-Hadoop can work with the existing HDFS. It also works with Tachyon, which is distributed, in-memory filesystem. (Its not a replacement for HDFS, which is a disk-based fs).
+~~Hadoop~~ Spark can work with the existing HDFS. It also works with Tachyon, which is distributed, in-memory filesystem. (Its not a replacement for HDFS, which is a disk-based fs).
 
 And can also work with Yarn resource manager; however, it is compatible with another resource manager : Mesos, and ships with a Standalone resource manager of its own.
 
@@ -23,32 +23,32 @@ This is how the Map-Reduce jobs in the Hadoop ecosystem work...
 
 Hadoop Map Reduce
 -----------------
-Map-Reduce has a master process called JobTracker, which is a JVM process. It has several slave processes called TaskTrackers, which are also JVM processes, running on the cluster nodes.
+Map-Reduce has a master process called **JobTracker**, which is a JVM process. It has several slave processes called **TaskTrackers**, which are also JVM processes, running on the cluster nodes.
 
-HDFS side of things has another master called NameNode (a JVM process), and it has corresponding slaves called DataNodes (also JVM processes) running on the nodes in the cluster.
+HDFS side of things has another master called **NameNode** (a JVM process), and it has corresponding slaves called **DataNodes** (also JVM processes) running on the nodes in the cluster.
 
-JobTracker sends 'tasks' to the TaskTrackers, which are then responsible for creating child processes which do a Map job or a Reduce job as required. Important difference from Spark is that these Map and Reduce jobs are individual processes (whereas in Spark, map and reduce are run as tasks inside existing Executors, and each executor can do multiple tasks, whereas here we spawn a new JVM for each Map or Reduce job).
+*JobTracker* sends 'tasks' to the *TaskTrackers*, which are then responsible for creating *child processes* which do a **Map** job or a **Reduce** job as required. Important difference from Spark is that these Map and Reduce jobs are individual processes (whereas in Spark, map and reduce are run as tasks inside existing Executors, and each executor can do multiple tasks, whereas here we spawn a new JVM for each Map or Reduce job).
 
 Idea was that if a Map or Reduce process started behaving weirdly, it would not affect or compromise map or reduce tasks running in other JVMs.
 
 Yarn
 ====
 Yarn is a Resource Manager. Its job is to manage the resources in a cluster.
-Its basically a bunch of JVMs running in the cluster, with a ResourceManager JVM (which is like a master) and NodeManager JVMs running on each node in the cluster.
-Apart from the above processes, there is a ApplicationMaster which runs for each application launched on the Yarn-cluster, and then there are Containers which are created on the cluster nodes where the jobs are carried out.
--- A Client submits an application to run to the ResourceManager.
--- This request contains information on how much resources does the ApplicationMaster of the application would require.
--- ResourceManager (the ApplicationsManager module) looks at the request, and creates a container on a node somewhere in the cluster for the ApplicationMaster.
+Its basically a bunch of JVMs running in the cluster, with a **ResourceManager** JVM (which is like a master) and **NodeManager** JVMs running on each node in the cluster.
+Apart from the above processes, there is a **ApplicationMaster** which runs for each application launched on the Yarn-cluster, and then there are **Containers** which are created on the cluster nodes where the jobs are carried out.
+-- A Client submits an application to run to the *ResourceManager*.
+-- This request contains information on how much resources does the *ApplicationMaster* of the application would require.
+-- *ResourceManager* (the ApplicationsManager module) looks at the request, and creates a container on a node somewhere in the cluster for the ApplicationMaster.
 -- A Container in yarn is basically a 'protected' allocation of the system resources (like cpu, memory).
--- ResourceManager creates the first container for the application on the cluster, by asking corresponding NodeManager processes of the node.
--- NodeManagers are responsible for communication of the node status, resource availability, etc to the ResourceManager, apart from launching the containers.
--- ApplicationMaster is started and registers itself with the ResourceManager.
--- ApplicationMaster is responsible for overseeing the execution of the application.
--- ApplicationMaster is responsible for requesting additional containers from the ResourceManager for the running the tasks.
--- ResourceManager looks at the requests from the ApplicationMaster, and grants permission (some form of key) to the ApplicationMaster to request containers on some nodes.
--- ApplicationMaster then presents these keys to the corresponding NodeMasters and gets the containers created for itself.
--- Containers then directly talk to the ApplicationMaster during the lifecycle of the application.
--- At the end the ApplicationMaster de-registers itself with the ResourceManager, which then deallocates the resources granted to the application.
+-- *ResourceManager* creates the first container for the application on the cluster, by asking corresponding *NodeManager* processes of the node.
+-- *NodeManagers* are responsible for communication of the node status, resource availability, etc to the *ResourceManager*, apart from launching the containers.
+-- *ApplicationMaster* is started and registers itself with the *ResourceManager*.
+-- *ApplicationMaster* is responsible for overseeing the execution of the application.
+-- *ApplicationMaster* is responsible for requesting additional containers from the ResourceManager for the running the tasks.
+-- *ResourceManager* looks at the requests from the *ApplicationMaster*, and grants permission (some form of key) to the *ApplicationMaster* to request containers on some nodes.
+-- *ApplicationMaster* then presents these keys to the corresponding *NodeMasters* and gets the containers created for itself.
+-- Containers then directly talk to the *ApplicationMaster* during the lifecycle of the application.
+-- At the end the *ApplicationMaster* de-registers itself with the *ResourceManager*, which then deallocates the resources granted to the application.
 
 
 Spark Deployment
@@ -62,12 +62,18 @@ Spark deployment modes : Spark is understood to be usable in four modes -- local
 -- There is only one JVM process which is started. This process can be thought of as both a Driver and an Executor.
 -- The application can be configured to use different number of threads for running tasks. By default it takes 1 thread.
 -- There are three options for this:
-    ## spark-shell --master local
-        $$ Create just one slot -- this is also the default option, when no --master is provided
-    ## spark-shell --master local[N]
-        $$ Create N slots for running threads
-    ## spark-shell --master local[*]
-        $$ Greedily create as many slots as the number of cores available (??? verification)
+```
+## spark-shell --master local
+```
+- Create just one slot -- this is also the default option, when no --master is provided
+```
+## spark-shell --master local[N]
+```
+- Create N slots for running threads
+```
+## spark-shell --master local[*]
+```
+Greedily create as many slots as the number of cores available (??? verification)
     ('slots' can be thought of as places where threads can run. This is the potential capacity to run threads, i.e., this is the maximum number of threads the application will spawn)
 
 2. Standalone mode

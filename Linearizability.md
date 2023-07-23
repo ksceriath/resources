@@ -7,6 +7,6 @@ Can be assumed synonymous with [[Strong Consistency]].
 => Any read should necessarily see the most recent write
 
 
-*A linearlizable system cannot have reads served locally from a replica - a more recent commited value might be visible to the replica and hence its not strong consistency.*
+*A linearlizable system cannot have reads served locally from a replica - a more recent committed value might be visible to the replica and hence its not strong consistency.*
 
 
